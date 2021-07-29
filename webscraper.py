@@ -20,7 +20,7 @@ textArea.send_keys(artist)
 textArea.send_keys(Keys.RETURN)
 time.sleep(3)
 
-#finds correcrt artisit and clicks it
+#finds correct artisit and clicks it
 Artist=driver.find_element_by_xpath("//div[@id='contents']/ytmusic-responsive-list-item-renderer/a")
 Artist.click()
 time.sleep(3)
@@ -62,14 +62,17 @@ class SongObj:
         self.song=song
         self.album=album
         self.times=times
+    def __str__(self):
+        return str(self.__dict__)
 
 songObjs=[]
 for i in range(len(elem)):
     newThing = SongObj(songs[i],albums[i],times[i])
     songObjs.append(newThing)
-
-print(songObjs[0].song,songObjs[0].album,songObjs[0].times)
+x={'song': 'Your New Boyfriend', 'album': 'Your New Boyfriend', 'times': '4:00'}
+y=json.dumps(x)
+print(y)
 #pushing pulled data to a json file
 #with open('songData.json', 'w') as outfile:
-    #json.dump(totalObjects, outfile)
+    #json.dump(songObjs[0], outfile)
     
