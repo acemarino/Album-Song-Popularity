@@ -4,6 +4,7 @@ import json
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
+import jsonpickle
 
 driver = webdriver.Chrome()
 #opens home page
@@ -15,7 +16,7 @@ searchButton.click()
 
 #enters desired search term(s)
 textArea=driver.find_element_by_xpath("//input[@placeholder='Search']")
-artist='BTS'
+artist='YOASOBI'
 textArea.send_keys(artist)
 textArea.send_keys(Keys.RETURN)
 time.sleep(3)
@@ -70,6 +71,8 @@ for i in range(len(elem1)):
     newThing = SongObj(songs[i],albums[i],times[i])
     songObjs.append(newThing)
 
+#code for sorting by album
+#need to refactor to make cleaner later
 UnqAlbList=[]
 UnqAlbList.append(songObjs[0])
 
@@ -87,9 +90,9 @@ for i in range(1,len(songObjs)):
             newlist.append(songObjs[i])
             totalList.append(newlist)
     added=False
-for x in totalList:
-    print("\n".join(map(str,x))) 
+
 #pushing pulled data to a json file
-#with open('songData.json', 'w') as outfile:
-    #json.dump(songObjs[0], outfile)
+with open('songData.json', 'w') as outfile:
+    tester= jsonpickle.encode(totalList,unpicklable=False)
+    json.dump(tester, outfile)
     
