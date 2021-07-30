@@ -15,7 +15,7 @@ searchButton.click()
 
 #enters desired search term(s)
 textArea=driver.find_element_by_xpath("//input[@placeholder='Search']")
-artist='Wilbur'
+artist='BTS'
 textArea.send_keys(artist)
 textArea.send_keys(Keys.RETURN)
 time.sleep(3)
@@ -42,17 +42,17 @@ for s in range(len(elem)):
 time.sleep(2)
 
 #album title
-elem = driver.find_elements_by_xpath("//div[@id='contents']/ytmusic-responsive-list-item-renderer/div[2]/div[3]/yt-formatted-string[2]/a")
+elem1 = driver.find_elements_by_xpath("//div[@id='contents']/ytmusic-responsive-list-item-renderer/div[2]/div[3]/yt-formatted-string[2]/a")
 albums=[]
-for s in range(len(elem)):
-    albums.append(elem[s].text)
+for s in range(len(elem1)):
+    albums.append(elem1[s].text)
 time.sleep(2)
 
 #song length
-elem = driver.find_elements_by_xpath('//yt-formatted-string[@size="MUSIC_RESPONSIVE_LIST_ITEM_FIXED_COLUMN_SIZE_SMALL"]')
+elem2 = driver.find_elements_by_xpath('//yt-formatted-string[@size="MUSIC_RESPONSIVE_LIST_ITEM_FIXED_COLUMN_SIZE_SMALL"]')
 times=[]
-for s in range(len(elem)):
-    times.append(elem[s].text)
+for s in range(len(elem2)):
+    times.append(elem2[s].text)
 driver.close()
 
 #creating objects that contain song name, album, and song time 
@@ -66,12 +66,29 @@ class SongObj:
         return str(self.__dict__)
 
 songObjs=[]
-for i in range(len(elem)):
+for i in range(len(elem1)):
     newThing = SongObj(songs[i],albums[i],times[i])
     songObjs.append(newThing)
-x={'song': 'Your New Boyfriend', 'album': 'Your New Boyfriend', 'times': '4:00'}
-y=json.dumps(x)
-print(y)
+
+UnqAlbList=[]
+UnqAlbList.append(songObjs[0])
+
+totalList=[]
+totalList.append(UnqAlbList)
+added=False
+
+for i in range(1,len(songObjs)):
+    for j in range(len(totalList)):
+        if songObjs[i].album == totalList[j][0].album:
+            totalList[j].append(songObjs[i])
+            added=True
+        if (added == False) and (j == (len(totalList)-1)):
+            newlist=[]
+            newlist.append(songObjs[i])
+            totalList.append(newlist)
+    added=False
+for x in totalList:
+    print("\n".join(map(str,x))) 
 #pushing pulled data to a json file
 #with open('songData.json', 'w') as outfile:
     #json.dump(songObjs[0], outfile)
