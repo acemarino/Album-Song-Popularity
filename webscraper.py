@@ -16,7 +16,7 @@ searchButton.click()
 
 #enters desired search term(s)
 textArea=driver.find_element_by_xpath("//input[@placeholder='Search']")
-artist='YOASOBI'
+artist='BTS'
 textArea.send_keys(artist)
 textArea.send_keys(Keys.RETURN)
 time.sleep(3)
