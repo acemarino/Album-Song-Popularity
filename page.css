@@ -1,0 +1,57 @@
+.wrapper {
+    height: 100vh;
+    /*This part is important for centering*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .typing-demo {
+    width: 17ch;
+    animation: typing 2s steps(17), blink .5s step-end infinite alternate;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid;
+    font-family: monospace;
+    font-size: 2em;
+  }
+  
+  .contentBlock {
+    font-size:10em;
+    text-align:center;
+    line-height:400px;
+    height:400px;
+    width:500px;
+    margin:10px;
+    border:1px solid black;
+    display: inline-block;
+    float:left;
+}
+  .scrollmenu {
+    background-color: #333;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin: 0 auto;
+    white-space: nowrap;
+  }
+  
+  .scrollmenuA {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+  }
+  
+  @keyframes typing {
+    from {
+      width: 0
+    }
+  }
+      
+  @keyframes blink {
+    50% {
+      border-color: transparent
+    }
+  }
+
