@@ -6,10 +6,3 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 
 // Then add additional custom code here
-// Create your own map
-$custom-colors: (
-  "custom-color": #900
-);
-
-// Merge the maps
-$theme-colors: map-merge($theme-colors, $custom-colors);
